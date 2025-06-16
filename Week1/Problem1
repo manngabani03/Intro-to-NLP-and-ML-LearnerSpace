@@ -1,0 +1,48 @@
+import numpy as np
+
+# Sub Question 1
+arr = np.random.randint(1, 51, size=(5, 4))
+print("2D Array:")  
+print(arr)
+print('\n')
+
+
+anti_diagonal = []
+print("Anti-diagonal elements: ")
+for a in range(5):
+    for b in range(4):
+        if a + b == 3: 
+            anti_diagonal = (arr[a, b])
+            print(anti_diagonal, end = " ")
+print('\n')
+
+# Sub Question 2
+print("Maximum value elements in each row of the array:")
+for a in range(5):
+    print(np.max(arr[a, :]), end=" ")
+
+# Sub Question 3
+print('\n')
+print("Elements less than the mean: ")
+mean = np.mean(arr)
+flattened_array = arr.flatten()
+new_array = []
+for value in flattened_array:
+    if value < mean:
+        new_array.append(value)
+        print(value, end=" ")
+
+# Sub Question 4
+
+
+top_row = arr[0, :]
+bottom_row = arr[-1, :]
+left_column = arr[:, 0]     
+right_column = arr[:, -1]
+boundary_elements = np.concatenate((top_row, right_column[1:-1], bottom_row[::-1], left_column[1:-1][::-1]))
+print("\n\nBoundary elements of the array:")
+print(boundary_elements)
+
+
+
+
