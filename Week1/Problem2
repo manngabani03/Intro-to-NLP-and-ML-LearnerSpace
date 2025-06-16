@@ -1,0 +1,44 @@
+import numpy as np
+
+# Sub Question 1
+arr = np.random.uniform(0, 10, size=20)
+print("1D Array: ")
+print(arr)
+print("\nRounding to 2 decimal places:")
+arr = arr.round(2)
+print(arr)
+
+# Sub Question 2
+max_value = np.max(arr)
+min_value = np.min(arr)
+median_value = np.median(arr)
+print("\nMaximum value:", max_value)   
+print("Minimum value:", min_value)
+print("Median value:", median_value)  
+
+# Sub Question 3
+for i in range(len(arr)):
+    if arr[i]<5:
+        arr[i]=pow(arr[i], 2)
+print("\nArray after squaring elements less than 5:")
+print(arr)
+
+# Sub Question 4
+def numpy_alternate_sort(arr):
+    sorted_arr = np.sort(arr)
+    result = []
+    left = 0
+    right = len(sorted_arr) - 1
+    while left <= right:
+        if left == right:
+            result.append(sorted_arr[left])
+        else:
+            result.append(sorted_arr[left])
+            result.append(sorted_arr[right])
+        left += 1
+        right -= 1
+    return np.array(result)
+
+alt_sorted_arr = numpy_alternate_sort(arr)
+print("\nAlternate smallest-largest order:")
+print(alt_sorted_arr)
