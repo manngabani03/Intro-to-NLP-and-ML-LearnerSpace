@@ -1,0 +1,39 @@
+import pandas as pd
+import numpy as np                  
+
+# Sub Question 1
+data = ({
+    "Name":    [f"Student_{i+1}" for i in range(10)],   
+    "Subject": np.random.choice(["Math", "Science", "English"], size=10), 
+    "Score":   np.random.randint(50, 101, size=10),     
+    "Grade":   ""                                       
+    })
+df = pd.DataFrame(data)
+                  
+for idx, row in df.iterrows():
+    score = row["Score"]
+    if 90 <= score <= 100:
+        grade = "A"
+    elif 80 <= score <= 89:
+        grade = "B"
+    elif 70 <= score <= 79:
+        grade = "C"
+    elif 60 <= score <= 69:
+        grade = "D"
+    else:
+        grade = "F"
+    df.at[idx, "Grade"] = grade
+
+# Sub Question 2
+print(df.sort_values(by=["Score"], ascending=False))
+
+# Sub Question 3
+average = df.groupby("Subject")["Score"].mean()   
+print("\nAverage scores by subject: " )
+print(average)                                     
+
+# Sub Question 4 
+def pandas_filter_pass(dataframe):                 
+    return dataframe[dataframe["Grade"].isin(["A", "B"])]
+print("\nStudents with grades A or B:")
+print(pandas_filter_pass(df)) 
