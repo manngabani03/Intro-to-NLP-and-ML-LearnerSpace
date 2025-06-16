@@ -33,13 +33,14 @@ for value in flattened_array:
         print(value, end=" ")
 
 # Sub Question 4
+def numpy_boundary_traversal(arr):
+    top_row = arr[0, :]
+    right_column = arr[1:-1, -1]
+    bottom_row = arr[-1, ::-1]
+    left_column = arr[-2:0:-1, 0]
+    return np.concatenate((top_row, right_column, bottom_row, left_column))
 
-
-top_row = arr[0, :]
-bottom_row = arr[-1, :]
-left_column = arr[:, 0]     
-right_column = arr[:, -1]
-boundary_elements = np.concatenate((top_row, right_column[1:-1], bottom_row[::-1], left_column[1:-1][::-1]))
+boundary_elements = numpy_boundary_traversal(arr)
 print("\n\nBoundary elements of the array:")
 print(boundary_elements)
 
