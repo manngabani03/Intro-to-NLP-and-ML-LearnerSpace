@@ -1,0 +1,139 @@
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score
+from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+
+positive_reviews = [
+    "I loved this movie, it was fantastic!",
+    "An amazing film with a great storyline.",
+    "Absolutely loved the acting and direction.",
+    "A masterpiece, truly inspiring.",
+    "One of the best movies I've seen this year.",
+    "Highly recommend this movie to everyone.",
+    "A wonderful experience, very touching.",
+    "The cinematography was breathtaking.",
+    "Great soundtrack and excellent performances.",
+    "A heartwarming story that stayed with me.",
+    "Brilliantly executed and well-paced.",
+    "The characters were very relatable.",
+    "A perfect blend of drama and humor.",
+    "This movie exceeded my expectations.",
+    "A must-watch for movie lovers.",
+    "The plot twists were unexpected and thrilling.",
+    "Exceptional storytelling and visuals.",
+    "A film that touched my soul.",
+    "Loved the chemistry between the leads.",
+    "A cinematic gem that deserves praise.",
+    "The direction was top-notch.",
+    "A beautifully crafted narrative.",
+    "The movie had a powerful message.",
+    "An emotional rollercoaster, well done.",
+    "The acting was superb throughout.",
+    "A visually stunning and engaging film.",
+    "The screenplay was tight and compelling.",
+    "A delightful movie experience.",
+    "The film was both entertaining and thought-provoking.",
+    "A story that stayed with me long after.",
+    "The performances were heartfelt and genuine.",
+    "A movie that inspires and entertains.",
+    "The pacing kept me hooked till the end.",
+    "A fantastic blend of action and emotion.",
+    "The film's message was clear and impactful.",
+    "A well-directed and beautifully acted movie.",
+    "The soundtrack perfectly complemented the scenes.",
+    "A movie that exceeded all my expectations.",
+    "The story was original and captivating.",
+    "A heartfelt and moving film.",
+    "The visuals were stunning and immersive.",
+    "A movie that I would watch again.",
+    "The dialogue was sharp and meaningful.",
+    "A film that left a lasting impression.",
+    "The characters were well-developed and interesting.",
+    "A movie that touched on important themes.",
+    "The direction and acting were flawless.",
+    "A beautifully told story with great depth.",
+    "The movie was a perfect blend of genres.",
+    "An unforgettable cinematic experience."
+]
+
+negative_reviews = [
+    "I hated this movie, it was terrible!",
+    "A boring film with a weak storyline.",
+    "Poor acting and bad direction.",
+    "A disappointing movie experience.",
+    "One of the worst movies I've seen this year.",
+    "Would not recommend this movie to anyone.",
+    "A forgettable and dull film.",
+    "The cinematography was lackluster.",
+    "Bad soundtrack and poor performances.",
+    "A story that failed to engage me.",
+    "Terribly executed and poorly paced.",
+    "The characters were unrelatable.",
+    "A failed attempt at drama and humor.",
+    "This movie did not meet my expectations.",
+    "A waste of time for movie lovers.",
+    "The plot was predictable and boring.",
+    "Poor storytelling and visuals.",
+    "A film that left me cold.",
+    "Disliked the chemistry between the leads.",
+    "A cinematic disaster that deserves criticism.",
+    "The direction was subpar.",
+    "A poorly crafted narrative.",
+    "The movie lacked a clear message.",
+    "An emotional mess, poorly done.",
+    "The acting was weak throughout.",
+    "A visually dull and disengaging film.",
+    "The screenplay was loose and unconvincing.",
+    "A disappointing movie experience.",
+    "The film was neither entertaining nor thought-provoking.",
+    "A story that I quickly forgot.",
+    "The performances were flat and unconvincing.",
+    "A movie that failed to inspire or entertain.",
+    "The pacing was slow and boring.",
+    "A poor blend of action and emotion.",
+    "The film's message was muddled and unclear.",
+    "A badly directed and poorly acted movie.",
+    "The soundtrack was distracting and out of place.",
+    "A movie that did not live up to expectations.",
+    "The story was clichéd and uninspired.",
+    "A cold and unfeeling film.",
+    "The visuals were unimpressive and flat.",
+    "A movie I would not watch again.",
+    "The dialogue was weak and meaningless.",
+    "A film that left no impression.",
+    "The characters were shallow and uninteresting.",
+    "A movie that ignored important themes.",
+    "The direction and acting were mediocre.",
+    "A poorly told story with little depth.",
+    "The movie was a confusing mix of genres.",
+    "A forgettable cinematic experience."
+]
+
+reviews = positive_reviews + negative_reviews
+sentiments = ["positive"] * 50 + ["negative"] * 50
+df = pd.DataFrame({"Review": reviews, "Sentiment": sentiments})
+
+# Sub Question 1
+custom_stop_words = list(ENGLISH_STOP_WORDS - {'no', 'not', 'never', 'neither', 'nor', 'nothing', 'nowhere', 'none'})
+vectorizer = CountVectorizer(max_features=500, stop_words=custom_stop_words)
+X = vectorizer.fit_transform(df['Review'])
+# Sub Question 2
+X_train, X_test, y_train, y_test = train_test_split(X, df['Sentiment'], test_size=0.2, random_state=42)
+
+# Sub Question 3
+model = MultinomialNB()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy}")
+
+# Sub Question 4
+def predict_review_sentiment(model, vectorizer, review):
+    review_vectorized = vectorizer.transform([review])
+    prediction = model.predict(review_vectorized)
+    return prediction[0]
+
+
+
