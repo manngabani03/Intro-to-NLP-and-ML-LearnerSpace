@@ -1,0 +1,155 @@
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import precision_score, recall_score, f1_score
+
+good_feedback = [
+    "Great product, really satisfied!",
+    "Excellent quality and fast delivery.",
+    "Very happy with the purchase.",
+    "Works perfectly as expected.",
+    "Highly recommend this to everyone.",
+    "Good value for the price.",
+    "Product exceeded my expectations.",
+    "Five stars, will buy again.",
+    "Customer service was very helpful.",
+    "Easy to use and reliable.",
+    "Love the design and functionality.",
+    "Exceeded my expectations in every way.",
+    "The product is durable and well-made.",
+    "Fast shipping and great packaging.",
+    "Very satisfied with the quality.",
+    "The product works as advertised.",
+    "Amazing value for the price.",
+    "I would definitely buy this again.",
+    "The features are exactly what I needed.",
+    "Customer support was responsive and helpful.",
+    "The product arrived earlier than expected.",
+    "Highly recommend to friends and family.",
+    "The quality is top-notch.",
+    "Very easy to set up and use.",
+    "The product performs well under pressure.",
+    "I am very pleased with this purchase.",
+    "The product looks great and works well.",
+    "Good value and excellent performance.",
+    "The product is worth every penny.",
+    "I am impressed with the build quality.",
+    "The product met all my expectations.",
+    "Very reliable and efficient.",
+    "The product is user-friendly and intuitive.",
+    "I am happy with the purchase overall.",
+    "The product is exactly as described.",
+    "Great customer service experience.",
+    "The product is lightweight and portable.",
+    "I would recommend this product to others.",
+    "The product has excellent features.",
+    "Very happy with the design and quality.",
+    "The product is easy to clean and maintain.",
+    "I am satisfied with the product's performance.",
+    "The product is well-packaged and protected.",
+    "Good quality and fast delivery.",
+    "The product is worth buying.",
+    "I am pleased with the product's durability.",
+    "The product exceeded my expectations.",
+    "Very happy with the purchase.",
+    "The product is fantastic and reliable.",
+    "I would buy this product again without hesitation."
+]
+
+bad_feedback = [
+    "Poor quality, very disappointed.",
+    "The product broke after one use.",
+    "Not worth the money.",
+    "Terrible customer service.",
+    "The product did not meet expectations.",
+    "Very unhappy with the purchase.",
+    "The product arrived damaged.",
+    "Not as described, very misleading.",
+    "The product is useless.",
+    "Waste of money and time.",
+    "The product stopped working quickly.",
+    "Very poor build quality.",
+    "The product is not durable.",
+    "Disappointed with the performance.",
+    "The product is a complete waste.",
+    "The customer support was unhelpful.",
+    "The product is cheaply made.",
+    "Not satisfied with the product.",
+    "The product is not as advertised.",
+    "The product arrived late and damaged.",
+    "The product is unreliable.",
+    "Very dissatisfied with the quality.",
+    "The product is not worth buying.",
+    "The product has many defects.",
+    "The product is poorly designed.",
+    "The product is uncomfortable to use.",
+    "The product is not user-friendly.",
+    "The product is a disappointment.",
+    "The product is not functional.",
+    "The product is not worth the price.",
+    "The product is a bad investment.",
+    "The product is not recommended.",
+    "The product is a failure.",
+    "The product is not reliable.",
+    "The product is poorly made.",
+    "The product is not effective.",
+    "The product is a scam.",
+    "The product is not as expected.",
+    "The product is a letdown.",
+    "The product is not worth the money spent.",
+    "The product is a poor choice.",
+    "The product is not satisfactory.",
+    "The product is a waste of resources.",
+    "The product is not durable.",
+    "The product is a bad purchase.",
+    "The product is not recommended by experts.",
+    "The product is a poor quality item.",
+    "The product is not worth the investment.",
+    "The product is a disappointment overall.",
+    "The product is not up to standards."
+]
+
+feedback = good_feedback + bad_feedback
+labels = ['good'] * 50 + ['bad'] * 50
+
+df = pd.DataFrame({"Feedback": feedback, "label": labels})
+
+vectorizer = TfidfVectorizer(max_features=300, lowercase=True, stop_words='english')
+X = vectorizer.fit_transform(df['Feedback'])
+
+X_train, X_test, y_train, y_test = train_test_split(X, df['label'], test_size=0.25)
+
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+precision = precision_score(y_test, y_pred, pos_label='good')
+recall = recall_score(y_test, y_pred, pos_label='good')
+f1 = f1_score(y_test, y_pred, pos_label='good')
+
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1 Score:", f1)
+
+def text_preprocess_vectorize(texts, vectorizer):
+    return vectorizer.transform(texts)
+
+text_samples = [
+    "The product exceeded my expectations and I am very satisfied with it.",
+    "I had a great experience with the service, highly recommend!",
+    "The quality of the item is top-notch, will buy again.",
+    "Absolutely love this! It has made my life so much easier.",
+    "The customer support was outstanding, very helpful and responsive.",
+    "This is the best purchase I've made in a long time, very happy!",
+    "The product arrived on time and in perfect condition.",
+    "I am extremely pleased with my order, thank you!",
+    "This service is fantastic, I will definitely use it again.",
+    "A wonderful experience from start to finish!"
+]
+
+example_vectorized = text_preprocess_vectorize(text_samples, vectorizer)
+
+print("Input texts:", text_samples)
+example_predictions = model.predict(example_vectorized)
+print("Predicted labels:", example_predictions)
