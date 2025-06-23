@@ -1,24 +1,24 @@
 Manual TF-IDF gives the scores
 Sentence 1:
-  TF-IDF for word 'the': 0.0
-  TF-IDF for word 'is': 0.08109302162163289
-  TF-IDF for word 'star': 0.21972245773362198
-  TF-IDF for word 'a': 0.08109302162163289
-  TF-IDF for word 'sun': 0.08109302162163289
+TF-IDF for word 'the': 0.0
+TF-IDF for word 'is': 0.08109302162163289
+TF-IDF for word 'star': 0.21972245773362198
+TF-IDF for word 'a': 0.08109302162163289
+TF-IDF for word 'sun': 0.08109302162163289
 Sentence 2:
-  TF-IDF for word 'the': 0.0
-  TF-IDF for word 'is': 0.08109302162163289
-  TF-IDF for word 'satellite': 0.21972245773362198
-  TF-IDF for word 'a': 0.08109302162163289
-  TF-IDF for word 'moon': 0.08109302162163289
+TF-IDF for word 'the': 0.0
+TF-IDF for word 'is': 0.08109302162163289
+TF-IDF for word 'satellite': 0.21972245773362198
+TF-IDF for word 'a': 0.08109302162163289
+TF-IDF for word 'moon': 0.08109302162163289
 Sentence 3:
-  TF-IDF for word 'and': 0.15694461266687282
-  TF-IDF for word 'the': 0.0
-  TF-IDF for word 'are': 0.15694461266687282
-  TF-IDF for word 'moon': 0.05792358687259491
-  TF-IDF for word 'bodies': 0.15694461266687282
-  TF-IDF for word 'celestial': 0.15694461266687282
-  TF-IDF for word 'sun': 0.05792358687259491
+TF-IDF for word 'and': 0.15694461266687282
+TF-IDF for word 'the': 0.0
+TF-IDF for word 'are': 0.15694461266687282
+TF-IDF for word 'moon': 0.05792358687259491
+TF-IDF for word 'bodies': 0.15694461266687282
+TF-IDF for word 'celestial': 0.15694461266687282
+TF-IDF for word 'sun': 0.05792358687259491
 
 While the Countvectorizer and TF-IDF together gives the scores in the form of a 
 TF-IDF Output using Scikit-Learn:
