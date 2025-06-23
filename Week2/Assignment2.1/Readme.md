@@ -41,6 +41,7 @@ TF-IDF for word 'celestial': 0.15694461266687282
 TF-IDF for word 'sun': 0.05792358687259491
 
 
+
 While the Countvectorizer and TF-IDF together gives the scores in the form of a 
 
 TF-IDF Output using Scikit-Learn:
