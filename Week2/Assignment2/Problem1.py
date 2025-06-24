@@ -8,7 +8,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import os
 
-base_dir = r'C:\\Users\\Mann\Desktop\\Intro to ML and NLP\Week2'   #Change this to your actual path
+# spam.csv is the kaggle dataset of SMS Spam Colleciton which i downloaded on my PC
+base_dir = r'C:\\Users\\Mann\Desktop\\Intro to ML and NLP\Week2'   #Change this to your actual path   
 file_name = 'spam.csv'                                             # Ensure the file exists in the specified path
 file_path = os.path.join(base_dir, file_name)
 df = pd.read_csv(file_path, encoding='latin-1')
